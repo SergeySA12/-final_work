@@ -28,8 +28,10 @@ def open_file():
     text.insert('1.0', data)
 
 root = Tk()
+#З аголовок.
 root.title("Заметки")
 root.geometry("400x400")
+
 
 menu_bar = Menu(root)
 file_menu = Menu(menu_bar)
@@ -42,8 +44,21 @@ file_menu.add_command(label="Сохранить как", command=save_as)
 menu_bar.add_cascade(label="Файл", menu=file_menu)
 
 # Создание размеров техтового файла.
-text = Text(root, width=400, height=400, background="Grey", fg='Lime')
-text.pack()
+text = Text(root,
+            width=400,
+            height=400,
+            background="Grey",
+            fg='Blue',
+            wrap=WORD,
+            insertbackground='brown',
+            selectbackground='#2F4F4F')
+text.pack(expand=1, fill=BOTH, side=LEFT)
+
+#Скрол текста.
+scroll = Scrollbar(text, command=text.yview)
+scroll.pack(side=RIGHT, fill=Y)
+text.config(yscrollcommand=scroll.set)
+
 
 root.config(menu=menu_bar)
 root.mainloop()
